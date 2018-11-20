@@ -4,79 +4,84 @@
 #include <iostream>
 #include <time.h>
 using namespace std;
-class AlgoritmoG(){
-   poblacion laPoblacion[130];
+class AlgoritmoG{
+   Poblacion laPoblacion[130];
     int generadorX;
     int generadorY;
-    srand (time(NULL));
-    AlgoritmoG(int x){
+public:
+    AlgoritmoG(){
         for(int i=0;i<100;i++){
             generadorX = rand() % 200 + 1;
             generadorY = rand() % 200 + 1;
-            poblacion[i]=poblacion(generadorX,generadorY);
+            Poblacion temp(generadorX,generadorY);
+            laPoblacion[i]=temp;
         }
-      for(int i=0;i<10000;i++){
+      for(int i=0;i<1000000000;i++){
          cruzar();
          mutar();
          aptitud();
          seleccionar();
+         cout<<i<<endl;
       }
     }
+
+
     void cruzar(){
         for(int i=0;i<30;i++){
             generadorX = rand() % 200 + 1;
             generadorY = rand() % 200 + 1;
-            poblacion[101+i]=poblacion((poblacion[generadorX].getX()),(poblacion[generadorY].getY()));
+            Poblacion temp(laPoblacion[generadorX].getX(),laPoblacion[generadorY].getY());
+            laPoblacion[101+i]=temp;
         }
     }
     void mutar(){
         for(int i=0;i<26;i++){
             generadorX = rand() % 200 + 1;
-            int temp=poblacion[generadorX].getX();
-            poblacion[generadorX].setX(temp+1);
+            int temp=laPoblacion[generadorX].getX();
+            laPoblacion[generadorX].setX(temp+1);
         }
     }
     void aptitud(){
         for(int i=0;i<131;i++){
-            int temp=2*poblacion[i].getX()*poblacion[i].getX()**poblacion[i].getY()*poblacion[i].getY()+1;//el uno es el resto del polinomio
-            poblacion[i].setApti(temp);
+            int temp=2*laPoblacion[i].getX()*laPoblacion[i].getX()*laPoblacion[i].getY()*laPoblacion[i].getY()+1;//el uno es el resto del polinomio
+            laPoblacion[i].setApti(temp);
         }
     }
     void seleccionar(){
-        poblacion sustituta[100];
+        Poblacion sustituta[100];
         for(int i=0;i<86;i++){
             int temp=0;
             int posicion=0;
             for(int j=0;j<131;j++){
-                if(poblacion[j].getApti()>temp){
-                    temp=poblacion[j].getApti();
+                if(laPoblacion[j].getApti()>temp){
+                    temp=laPoblacion[j].getApti();
                     posicion=j;
                 }
             }
-            sustituta[i]=poblacion[posicion];
-            poblacion[posicion].setApti(-1);
+            sustituta[i]=laPoblacion[posicion];
+            laPoblacion[posicion].setApti(-1);
         }
         for(int i=0;i<16;i++){
             int temp=1000000;
             int posicion=0;
             for(int j=0;j<131;j++){
-                if(poblacion[j].getApti()<temp&&poblacion[j].getApti()!=-1){
-                    temp=poblacion[j].getApti();
+                if(laPoblacion[j].getApti()<temp&&laPoblacion[j].getApti()!=-1){
+                    temp=laPoblacion[j].getApti();
                     posicion=j;
                 }
             }
-            sustituta[i+85]=poblacion[posicion];
-            poblacion[posicion].setApti(-1);
+            sustituta[i+85]=laPoblacion[posicion];
+            laPoblacion[posicion].setApti(-1);
         }
         for(int i=0;i<101;i++){
-            poblacion[i]=sustituta[i];
+            laPoblacion[i]=sustituta[i];
         }
         for(int i=101;i<130;i++){
-            poblacion[i].setX(0);
-            poblacion[i].setY(0);
-            poblacion[i].setApti(-1);
+            laPoblacion[i].setX(0);
+            laPoblacion[i].setY(0);
+            laPoblacion[i].setApti(-1);
         }
     }
-}
+};
 
 #endif // ALGORITMOG_H
