@@ -15,7 +15,12 @@ class AlgoritmoG(){
             generadorY = rand() % 200 + 1;
             poblacion[i]=poblacion(generadorX,generadorY);
         }
-
+      for(int i=0;i<10000;i++){
+         cruzar();
+         mutar();
+         aptitud();
+         seleccionar();
+      }
     }
     void cruzar(){
         for(int i=0;i<30;i++){
