@@ -5,6 +5,7 @@ class Poblacion{
     int y;
     int apti;
 public:
+    Poblacion(){}
     Poblacion(int a, int b){
         x=a;
         y=b;
