@@ -1,5 +1,6 @@
 #ifndef ALGORITMOGPAG_H
 #define ALGORITMOGPAG_H
+
 #include "agenteviajero.h"
 #include <iostream>
 #include <time.h>
@@ -23,7 +24,7 @@ public:
             laPoblacion[i][0]=0;
             laPoblacion[i][5]=0;
             for(int s=0;s<4;s++){
-                while(laPoblacion[i][0]==generadorX &&laPoblacion[i][1]==generadorX&&laPoblacion[i][2]==generadorX &&laPoblacion[i][3]==generadorX){
+                while(laPoblacion[i][0]==generadorX ||laPoblacion[i][1]==generadorX||laPoblacion[i][2]==generadorX ||laPoblacion[i][3]==generadorX||laPoblacion[i][4]==generadorX){
                     generadorX = rand() % 5;
 
                 }
@@ -37,21 +38,30 @@ public:
          aptitud();
          seleccionar();
       }
-      for(int i=0;i<7;i++){
+      for(int i=0;i<6;i++){
           cout<<laPoblacion[0][i]<<endl;
       }
     }
 
 
     void cruzar(){
+        int generadorW;
         for(int i=0;i<30;i++){
            generadorX = rand() % 100+1;
            generadorY= rand() % 100+1;
-           for(int r=0;r<5;r++){
+           for(int r=0;r<6;r++){
                if(r<3){
                    laPoblacion[i+100][r]=laPoblacion[generadorX][r];
                }else{
-                  laPoblacion[i+100][r]=laPoblacion[generadorY][r];
+                   if(laPoblacion[i+100][1]!=laPoblacion[generadorY][r]&&laPoblacion[i+100][2]!=laPoblacion[generadorY][r]){
+                       laPoblacion[i+100][r]=laPoblacion[generadorY][r];
+                   }else{
+                       generadorW=laPoblacion[generadorY][r];
+                       while(laPoblacion[i+100][r-2]==generadorW ||laPoblacion[i+100][r-3]==generadorW||laPoblacion[i+100][r-1]==generadorW){
+                           generadorW = rand() % 4+1;
+                       }
+                        laPoblacion[i+100][r]=generadorW;
+                   }
                }
            }
         }
@@ -61,17 +71,17 @@ public:
         int generadorEm;
         for(int i=0;i<26;i++){
             generadorX=rand()% 130;
-            generadorY=rand()% 6;
-            generadorEm=rand()%5+1;
+            generadorY=rand()% 4+1;
+            generadorEm=rand()% 4+1;
             int temp=laPoblacion[generadorX][generadorEm];
             int j=0;
             laPoblacion[generadorX][generadorEm]=generadorY;
-            while(laPoblacion[generadorX][generadorEm]!=laPoblacion[generadorX][j]){
+            /*while(laPoblacion[generadorX][generadorEm]!=laPoblacion[generadorX][j]){
 
                 j++;
             }
             laPoblacion[generadorX][j]=temp;
-
+*/
 
         }
 
@@ -86,6 +96,7 @@ public:
 
                 }else{
                     temporal=-1;
+                    s=5;
                 }
 
             }
@@ -96,11 +107,11 @@ public:
     }
 
     void ordenar(){
-        int temporal[6];
+        int temporal[7];
         for(int i=0;i<130;i++){
             for(int j=i+1;j<130;j++){
-                if(laPoblacion[i][6]>laPoblacion[j][6]){
-                    for(int s=0;s<6;s++){
+                if(laPoblacion[i][6]<laPoblacion[j][6]){
+                    for(int s=0;s<7;s++){
                         temporal[s]=laPoblacion[i][s];
                         laPoblacion[i][s]=laPoblacion[j][s];
                         laPoblacion[j][s]=temporal[s];
@@ -115,7 +126,7 @@ public:
         int temp=0;
         for(int i=0;i<15;i++){
             for(int s =0; s<6;s++){
-                while(laPoblacion[130-i][s]<-1){
+                while(laPoblacion[130-temp][s]<-1){
                     temp++;
                 }
                 laPoblacion[i+85][s]=laPoblacion[130-(temp+i)][s];
