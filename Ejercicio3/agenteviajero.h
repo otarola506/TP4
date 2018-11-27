@@ -2,7 +2,7 @@
 #define AGENTEVIAJERO_H
 class AgenteViajero{
 
-    int datos[4][4];
+    int datos[5][5];
     public:
     AgenteViajero(){
         datos[0][0]=-1;
@@ -35,5 +35,5 @@ class AgenteViajero{
     int getDatos(int ciudadPartida, int ciudadLlegada){
         return datos[ciudadPartida][ciudadLlegada];
     }
-}
+};
 #endif // AGENTEVIAJERO_H
