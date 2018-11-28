@@ -230,3 +230,9 @@ string Polinomio::ImprimirDerivada()
    }
    return respuesta;
 }
+
+int Polinomio::GetDato(int a, int b)
+{
+    int resp = matriz[a][b];
+    return resp;
+}

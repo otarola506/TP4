@@ -3,14 +3,14 @@
 class Poblacion{
     int x;
     int y;
-    int z;
+    int coeficiente;
     int apti;
 public:
     Poblacion(){}
-    Poblacion(int a, int b, int d){
+    Poblacion(int a, int b){
         x=a;
         y=b;
-        z = d;
+        coeficiente = 0;
         apti=-1;
     }
     void setX(int a){
@@ -22,11 +22,11 @@ public:
     void setApti(int c){
         apti=c;
     }
-    void setZ(int d){
-        z=d;
+    void setCoeficiente(int d){
+        coeficiente=d;
     }
-    int getZ(){
-       return z;
+    int getCoeficiente(){
+       return coeficiente;
     }
     int getApti(){
        return apti;

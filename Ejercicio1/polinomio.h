@@ -6,10 +6,11 @@ using namespace std;
 
 class Polinomio{
     public:
+       Polinomio(){}
+       Polinomio(string polinomioUsuario);
        string polinomio;
        int matriz[10][3];
        int matrizB[10][3];
-       Polinomio(string polinomioUsuario);
        void SepararMonomio();
        string Imprimir();
        void CambiarCoeficiente(int coeficiente, int gradoX, int gradoY);
@@ -25,5 +26,6 @@ class Polinomio{
        int GetExponenteMayorY();
        void Derivar();
        string ImprimirDerivada();
+       int GetDato(int a, int b);
 };
 #endif
