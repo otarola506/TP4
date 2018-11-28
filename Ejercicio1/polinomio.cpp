@@ -1,87 +1,51 @@
 #include "Polinomio.h"
 #include <iostream>
-//#include <wx/tokenzr.h>
 #include <sstream>
+#include <bits/stdc++.h>
+#include <stdlib.h>
 
 using namespace std;
 
 Polinomio::Polinomio(string polinomioUsuario)
 {
    polinomio = polinomioUsuario;
-   matriz[10][4];
+   matriz[10][3];
+   matrizB[10][3];
    for(int i = 0; i < 10; i++){
        matriz[i][0] = 0;
        matriz[i][1] = 0;
        matriz[i][2] = 0;
-       matriz[i][3] = 0;
+       matrizB[i][0] = 0;
+       matrizB[i][1] = 0;
+       matrizB[i][2] = 0;
    }
 }
 
 void Polinomio:: SepararMonomio()
 {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   long exponen = 0;
-   long coef = 0;
-   /*wxString coeficientes;
-   wxString exponentes;
-   wxString polinomioUsuario(polinomio);
-       wxStringTokenizer t(polinomioUsuario, "+");
-   int contador = 0;
-   while ( t.HasMoreTokens() )
-   {
-       wxStringTokenizer m(t.GetNextToken(), "x");
-       if(m.HasMoreTokens())
-       {
-           coeficientes = m.GetNextToken();
-
-       }
-       if(m.HasMoreTokens())
-       {
-           exponentes = m.GetNextToken();
-       }
-       wxString number(exponentes);*/
-       //if(!number.ToLong(&exponen)) {/* error */};
-       //wxString number1(coeficientes);
-       //if(!number1.ToLong(&coef)) {/* error */};
-       //matriz[contador][0] = coef;
-       //matriz[contador][1] = exponen;
-       //contador++;
-   //}
+    int n = polinomio.length();
+    char cadena[n+1];
+    strcpy(cadena, polinomio.c_str());
+    int contador = 0;
+    for(int i = 0; i < n; i++){
+        if(cadena[i]== 'x'){
+           int numP = cadena[i-1] -48;
+           int numX = cadena[i+1] -48;
+           int numY= cadena[i+3] -48;
+           matriz[contador][0] = numP;
+           matriz[contador][1] = numX;
+           matriz[contador][2] = numY;
+           contador++;
+         }
+     }
 }
 
-void Polinomio::CambiarCoeficienteX(int coeficiente, int grado)
+void Polinomio::CambiarCoeficiente(int coeficiente, int gradoX, int gradoY)
 {
    for(int i=0; i<10; i++){
-       if(matriz[i][1] == grado)
+       if(matriz[i][1] == gradoX && matriz[i][2] == gradoY)
        {
            matriz[i][0] = coeficiente;
-       }
-   }
-}
-
-void Polinomio::CambiarCoeficienteY(int coeficiente, int grado)
-{
-   for(int i=0; i<10; i++){
-       if(matriz[i][3] == grado)
-       {
-           matriz[i][2] = coeficiente;
        }
    }
 }
@@ -130,59 +94,44 @@ string Polinomio::Imprimir()
    string respuesta;
    for(int i=0; i<10; i++){
        stringstream x;
-       if(matriz[i][1] != 0 && matriz[i][3] != 0)
+       if(matriz[i][1] != 0 && matriz[i][2] != 0)
        {
-           x << matriz[i][0] << " " << matriz[i][1] << matriz[i][2] << " " << matriz[i][3] << "\n";
+           x << matriz[i][0] << " " << matriz[i][1] << " " << matriz[i][2] << "\n";
        }
        respuesta += x.str();
    }
    return respuesta;
 }
 
-void Polinomio::Agregar(int coeficienteX, int exponenteX, int coeficienteY, int exponenteY)
+void Polinomio::Agregar(int coeficiente, int exponenteX, int exponenteY)
 {
     for(int i=0; i<10; i++){
-        if(matriz[i][1] == 0 && matriz[i][3] == 0)
+        if(matriz[i][1] == 0 && matriz[i][2] == 0)
         {
-            matriz[i][0] = coeficienteX;
-            matriz[i][2] = coeficienteY;
+            matriz[i][0] = coeficiente;
             matriz[i][1] = exponenteX;
-            matriz[i][3] = exponenteY;
+            matriz[i][2] = exponenteY;
         }
     }
 }
 
-void Polinomio::Modificar(int coeficienteX, int exponenteX, int coeficienteY, int exponenteY)
+void Polinomio::Modificar(int coeficiente, int exponenteX, int exponenteY)
 {
    for(int i=0; i<10; i++){
-       if(matriz[i][1] == exponenteX && matriz[i][3] == exponenteY)
+       if(matriz[i][1] == exponenteX && matriz[i][2] == exponenteY)
        {
-           matriz[i][0] = coeficienteX;
-           matriz[i][2] = coeficienteY;
+           matriz[i][0] = coeficiente;
        }
    }
 }
 
-int Polinomio::GetCoeficienteX(int expo)
+int Polinomio::GetCoeficiente(int expoX, int expoY)
 {
    int r = 0;
    for(int i = 0; i < 10; i++)
    {
-       if(matriz[i][1] == expo){
+       if(matriz[i][1] == expoX && matriz[i][2] == expoY){
            r = matriz[i][0];
-           i = 10;
-       }
-   }
-   return r;
-}
-
-int Polinomio::GetCoeficienteY(int expo)
-{
-   int r = 0;
-   for(int i = 0; i < 10; i++)
-   {
-       if(matriz[i][3] == expo){
-           r = matriz[i][2];
            i = 10;
        }
    }
@@ -207,8 +156,8 @@ int Polinomio::GetExponenteY(int coefi)
    int r = 0;
    for(int i = 0; i < 10; i++)
    {
-       if(matriz[i][2] == coefi){
-           r = matriz[i][3];
+       if(matriz[i][0] == coefi){
+           r = matriz[i][2];
            i = 10;
        }
    }
@@ -222,7 +171,7 @@ string Polinomio::ImprimirPolinomio()
        stringstream x;
        if(matriz[i][1] != 0)
        {
-           x << matriz[i][0] << "x" << matriz[i][1] << " " << matriz[i][2] << "y" << matriz[i][3] << "+";
+           x << matriz[i][0] << "x" << matriz[i][1] << "y" << matriz[i][2] << "+";
        }
        resp += x.str();
    }
@@ -248,11 +197,42 @@ int Polinomio::GetExponenteMayorY()
    int resp = 0;
    for(int i=0; i<10; i++)
    {
-       int a = matriz[i][3];
+       int a = matriz[i][2];
        if(resp < a)
        {
            resp = a;
        }
    }
    return resp;
+}
+
+void Polinomio::Derivar()
+{
+    for(int i=0; i<10; i++){
+        if(matriz[i][0]!=0){
+            matrizB[i][0] = matriz[i][0] * matriz[i][1] * matriz[i][2];
+            matrizB[i][1] = matriz[i][1] - 1;
+            matrizB[i][2] = matriz[i][2] - 1;
+        }
+    }
+}
+
+string Polinomio::ImprimirDerivada()
+{
+   string respuesta;
+   for(int i=0; i<10; i++){
+       stringstream x;
+       if(matrizB[i][1] != 0 && matrizB[i][2] != 0)
+       {
+           x << matrizB[i][0] << " " << matrizB[i][1] << " " << matrizB[i][2] << "\n";
+       }
+       respuesta += x.str();
+   }
+   return respuesta;
+}
+
+int Polinomio::GetDato(int a, int b)
+{
+    int resp = matriz[a][b];
+    return resp;
 }

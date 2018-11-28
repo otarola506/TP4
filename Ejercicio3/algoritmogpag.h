@@ -38,9 +38,14 @@ public:
          aptitud();
          seleccionar();
       }
-      for(int i=0;i<6;i++){
-          cout<<laPoblacion[0][i]<<endl;
+      int k=0;
+      while(laPoblacion[k][6]==-1){
+          k++;
       }
+      for(int i=0;i<6;i++){
+          cout<<laPoblacion[k][i]<<endl;
+      }
+       cout<<laPoblacion[k][6]<<endl;
     }
 
 
@@ -77,7 +82,6 @@ public:
             int j=0;
             laPoblacion[generadorX][generadorEm]=generadorY;
             /*while(laPoblacion[generadorX][generadorEm]!=laPoblacion[generadorX][j]){
-
                 j++;
             }
             laPoblacion[generadorX][j]=temp;
@@ -124,9 +128,12 @@ public:
     void seleccionar(){
         ordenar();
         int temp=0;
+        for(int i=0;i<85;i++){
+
+        }
         for(int i=0;i<15;i++){
             for(int s =0; s<6;s++){
-                while(laPoblacion[130-temp][s]<-1){
+                while(laPoblacion[130-temp][6]<-1){
                     temp++;
                 }
                 laPoblacion[i+85][s]=laPoblacion[130-(temp+i)][s];
