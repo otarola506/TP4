@@ -7,22 +7,23 @@ using namespace std;
 class Polinomio{
     public:
        string polinomio;
-       long matriz[10][4];
+       int matriz[10][3];
+       int matrizB[10][3];
        Polinomio(string polinomioUsuario);
        void SepararMonomio();
        string Imprimir();
-       void CambiarCoeficienteX(int coeficiente, int grado);
-       void CambiarCoeficienteY(int coeficiente, int grado);
+       void CambiarCoeficiente(int coeficiente, int gradoX, int gradoY);
        void EliminarGrado(int grado);
        bool Consultar(int expo);
-       void Agregar(int coeficienteX, int exponenteX, int coeficienteY, int exponenteY);
-       void Modificar(int coeficienteX, int exponenteX, int coeficienteY, int exponenteY);
+       void Agregar(int coeficiente, int coeficienteY, int exponenteY);
+       void Modificar(int coeficiente, int exponenteX, int exponenteY);
        int GetExponenteX(int coefi);
        int GetExponenteY(int coefi);
-       int GetCoeficienteX(int expo);
-       int GetCoeficienteY(int expo);
+       int GetCoeficiente(int expoX, int expoY);
        string ImprimirPolinomio();
        int GetExponenteMayorX();
        int GetExponenteMayorY();
+       void Derivar();
+       string ImprimirDerivada();
 };
 #endif

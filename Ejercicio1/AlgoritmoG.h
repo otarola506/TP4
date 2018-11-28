@@ -3,17 +3,21 @@
 #include "poblacion.h"
 #include <iostream>
 #include <time.h>
+
 using namespace std;
+
 class AlgoritmoG{
    Poblacion laPoblacion[130];
     int generadorX;
     int generadorY;
+    int generadorZ;
 public:
     AlgoritmoG(){
         for(int i=0;i<100;i++){
             generadorX = rand() % 200 + 1;
             generadorY = rand() % 200 + 1;
-            Poblacion temp(generadorX,generadorY);
+            generadorZ = rand() % 200 + 1;
+            Poblacion temp(generadorX,generadorY,generadorZ);
             laPoblacion[i]=temp;
         }
       for(int i=0;i<1000000000;i++){
@@ -30,7 +34,8 @@ public:
         for(int i=0;i<30;i++){
             generadorX = rand() % 200 + 1;
             generadorY = rand() % 200 + 1;
-            Poblacion temp(laPoblacion[generadorX].getX(),laPoblacion[generadorY].getY());
+            generadorZ = rand() % 200 + 1;
+            Poblacion temp(laPoblacion[generadorX].getX(),laPoblacion[generadorY].getY(),laPoblacion[generadorZ].getZ());
             laPoblacion[101+i]=temp;
         }
     }
@@ -43,7 +48,7 @@ public:
     }
     void aptitud(){
         for(int i=0;i<131;i++){
-            int temp=2*laPoblacion[i].getX()*laPoblacion[i].getX()*laPoblacion[i].getY()*laPoblacion[i].getY()+1;//el uno es el resto del polinomio
+            int temp=2*laPoblacion[i].getX()*laPoblacion[i].getX()*laPoblacion[i].getY()*laPoblacion[i].getY()*laPoblacion[i].getZ()+1;//el uno es el resto del polinomio
             laPoblacion[i].setApti(temp);
         }
     }
@@ -79,6 +84,7 @@ public:
         for(int i=101;i<130;i++){
             laPoblacion[i].setX(0);
             laPoblacion[i].setY(0);
+            laPoblacion[i].setZ(0);
             laPoblacion[i].setApti(-1);
         }
     }
