@@ -4,9 +4,7 @@ using namespace std;
 
 
 int main(){
-    //int num=rand() % 5;
+    srand (time(NULL));
     AlgoritmoG s1;
-    //cout<< num<<endl;
-    delete s1;
     return 0;
 }
