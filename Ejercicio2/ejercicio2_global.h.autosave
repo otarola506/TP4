@@ -1,0 +1,12 @@
+#ifndef EJERCICIO2_GLOBAL_H
+#define EJERCICIO2_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+#include "algo"
+#if defined(EJERCICIO2_LIBRARY)
+#  define EJERCICIO2SHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define EJERCICIO2SHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // EJERCICIO2_GLOBAL_H
