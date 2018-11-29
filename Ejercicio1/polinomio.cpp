@@ -9,15 +9,12 @@ using namespace std;
 Polinomio::Polinomio(string polinomioUsuario)
 {
    polinomio = polinomioUsuario;
+   cantMonomiosDerivada = 0;
    matriz[10][3];
-   matrizB[10][3];
    for(int i = 0; i < 10; i++){
        matriz[i][0] = 0;
        matriz[i][1] = 0;
        matriz[i][2] = 0;
-       matrizB[i][0] = 0;
-       matrizB[i][1] = 0;
-       matrizB[i][2] = 0;
    }
 }
 
@@ -210,29 +207,21 @@ void Polinomio::Derivar()
 {
     for(int i=0; i<10; i++){
         if(matriz[i][0]!=0){
-            matrizB[i][0] = matriz[i][0] * matriz[i][1] * matriz[i][2];
-            matrizB[i][1] = matriz[i][1] - 1;
-            matrizB[i][2] = matriz[i][2] - 1;
+            matriz[i][0] = matriz[i][0] * matriz[i][1] * matriz[i][2];
+            matriz[i][1] = matriz[i][1] - 1;
+            matriz[i][2] = matriz[i][2] - 1;
+            cantMonomiosDerivada++;
         }
     }
-}
-
-string Polinomio::ImprimirDerivada()
-{
-   string respuesta;
-   for(int i=0; i<10; i++){
-       stringstream x;
-       if(matrizB[i][1] != 0 && matrizB[i][2] != 0)
-       {
-           x << matrizB[i][0] << " " << matrizB[i][1] << " " << matrizB[i][2] << "\n";
-       }
-       respuesta += x.str();
-   }
-   return respuesta;
 }
 
 int Polinomio::GetDato(int a, int b)
 {
     int resp = matriz[a][b];
     return resp;
+}
+
+int Polinomio::CantidadMonomiosDerivada()
+{
+    return cantMonomiosDerivada;
 }

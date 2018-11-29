@@ -16,7 +16,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    main.cpp \
     polinomio.cpp
 
 # Default rules for deployment.

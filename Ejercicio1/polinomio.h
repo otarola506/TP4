@@ -9,8 +9,8 @@ class Polinomio{
        Polinomio(){}
        Polinomio(string polinomioUsuario);
        string polinomio;
+       int cantMonomiosDerivada;
        int matriz[10][3];
-       int matrizB[10][3];
        void SepararMonomio();
        string Imprimir();
        void CambiarCoeficiente(int coeficiente, int gradoX, int gradoY);
@@ -25,7 +25,7 @@ class Polinomio{
        int GetExponenteMayorX();
        int GetExponenteMayorY();
        void Derivar();
-       string ImprimirDerivada();
        int GetDato(int a, int b);
+       int CantidadMonomiosDerivada();
 };
 #endif

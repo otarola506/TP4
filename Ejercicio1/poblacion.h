@@ -22,12 +22,6 @@ public:
     void setApti(int c){
         apti=c;
     }
-    void setCoeficiente(int d){
-        coeficiente=d;
-    }
-    int getCoeficiente(){
-       return coeficiente;
-    }
     int getApti(){
        return apti;
     }
