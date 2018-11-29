@@ -6,9 +6,12 @@
 
 using namespace std;
 
-Polinomio::Polinomio(string polinomioUsuario)
+Polinomio::Polinomio()
 {
-   polinomio = polinomioUsuario;
+   cout << "Digite el polinomio separado por +, en caso de restas adjuentelo +-. Ej: 2x2y2+3x3y3+4x4y4 Valido para digitos entre 1 y 9";
+   string x;
+   cin >> x;
+   polinomio = x;
    cantMonomiosDerivada = 0;
    matriz[10][3];
    for(int i = 0; i < 10; i++){
@@ -16,6 +19,7 @@ Polinomio::Polinomio(string polinomioUsuario)
        matriz[i][1] = 0;
        matriz[i][2] = 0;
    }
+   SepararMonomio();
 }
 
 void Polinomio:: SepararMonomio()

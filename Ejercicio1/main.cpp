@@ -1,10 +1,11 @@
-//#include "polinomio.h"
+#include "polinomio.h"
 #include "algoritmog.h"
 //#include <time.h>
 
 int main()
 {
-    //srand (time(NULL));
-    AlgoritmoG a;
+    //Polinomio a;
+    //cout << a.Imprimir();
+    AlgoritmoG s;
     return 0;
 }

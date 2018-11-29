@@ -3,14 +3,12 @@
 class Poblacion{
     int x;
     int y;
-    int coeficiente;
     int apti;
 public:
     Poblacion(){}
     Poblacion(int a, int b){
         x=a;
         y=b;
-        coeficiente = 0;
         apti=-1;
     }
     void setX(int a){

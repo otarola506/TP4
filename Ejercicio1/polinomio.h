@@ -6,8 +6,7 @@ using namespace std;
 
 class Polinomio{
     public:
-       Polinomio(){}
-       Polinomio(string polinomioUsuario);
+       Polinomio();
        string polinomio;
        int cantMonomiosDerivada;
        int matriz[10][3];
